@@ -121,7 +121,7 @@ export class JunctureBackend {
       baseURL: this.config.junctureApiUrl,
       headers: {
         'Content-Type': 'application/json',
-        'X-Juncture-Secret-Key': this.config.junctureSecretKey,
+        'Authorization': `Bearer ${this.config.junctureSecretKey}`,
       },
     });
 
