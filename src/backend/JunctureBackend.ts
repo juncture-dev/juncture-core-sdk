@@ -169,7 +169,7 @@ export class JunctureBackend {
    */
   private async checkConnectionValidity(request: CheckConnectionValidityRequest): Promise<CheckConnectionValidityResponse> {
     try {
-      const response = await this.httpClient.get('/check-connection-validity', {
+      const response = await this.httpClient.get('/api/backend/connection-info/check-connection-validity', {
         params: {
           external_id: request.externalId,
           provider: request.provider
@@ -193,7 +193,7 @@ export class JunctureBackend {
    */
   private async getConnectionCredentials(request: GetConnectionCredentialsRequest): Promise<GetConnectionCredentialsResponse> {
     try {
-      const response = await this.httpClient.get('/get-connection-credentials', {
+      const response = await this.httpClient.get('/api/backend/connection-info/get-connection-credentials', {
         params: {
           external_id: request.externalId,
           provider: request.provider
@@ -218,7 +218,7 @@ export class JunctureBackend {
    */
   private async getAccessToken(request: GetAccessTokenRequest): Promise<GetAccessTokenResponse> {
     try {
-      const response = await this.httpClient.get('/get-access-token', {
+      const response = await this.httpClient.get('/api/backend/connection-info/get-access-token', {
         params: {
           external_id: request.externalId,
           provider: request.provider
@@ -245,7 +245,7 @@ export class JunctureBackend {
   // Project Methods
   private async getJiraProjects(): Promise<GetJiraProjectsResponse> {
     try {
-      const response = await this.httpClient.get('/get-all-projects');
+      const response = await this.httpClient.get('/api/backend/jira/get-all-projects');
       return {
         projects: response.data.projects || []
       };
@@ -256,7 +256,7 @@ export class JunctureBackend {
 
   private async selectJiraProject(request: SelectJiraProjectRequest): Promise<SelectJiraProjectResponse> {
     try {
-      const response = await this.httpClient.post('/select-project', {
+      const response = await this.httpClient.post('/api/backend/jira/select-project', {
         project_id: request.projectId
       });
       
@@ -270,7 +270,7 @@ export class JunctureBackend {
 
   private async getSelectedJiraProjectId(): Promise<GetSelectedJiraProjectIdResponse> {
     try {
-      const response = await this.httpClient.get('/get-selected-project-id');
+      const response = await this.httpClient.get('/api/backend/jira/get-selected-project-id');
       return {
         projectId: response.data.project_id
       };
@@ -282,7 +282,7 @@ export class JunctureBackend {
   // Ticket Methods
   private async getJiraTickets(request?: GetJiraTicketsRequest): Promise<GetJiraTicketsResponse> {
     try {
-      const response = await this.httpClient.get('/get-tickets-for-project', {
+      const response = await this.httpClient.get('/api/backend/jira/get-tickets-for-project', {
         params: {
           maxResults: request?.maxResults,
           startAt: request?.startAt
@@ -302,7 +302,7 @@ export class JunctureBackend {
 
   private async getJiraTicketsForSprint(request: GetJiraTicketsForSprintRequest): Promise<GetJiraTicketsForSprintResponse> {
     try {
-      const response = await this.httpClient.get('/get-tickets-for-sprint', {
+      const response = await this.httpClient.get('/api/backend/jira/get-tickets-for-sprint', {
         params: {
           sprint_id: request.sprintId,
           maxResults: request.maxResults,
@@ -323,7 +323,7 @@ export class JunctureBackend {
 
   private async getJiraIssue(request: GetJiraIssueRequest): Promise<GetJiraIssueResponse> {
     try {
-      const response = await this.httpClient.get('/get-issue-details', {
+      const response = await this.httpClient.get('/api/backend/jira/get-issue-details', {
         params: {
           issue_key: request.issueKey
         }
@@ -339,7 +339,7 @@ export class JunctureBackend {
 
   private async createJiraTicket(request: CreateJiraTicketRequest): Promise<CreateJiraTicketResponse> {
     try {
-      const response = await this.httpClient.post('/create-ticket', {
+      const response = await this.httpClient.post('/api/backend/jira/create-ticket', {
         project_key: request.projectKey,
         issue_type: request.issueType,
         summary: request.summary,
@@ -361,7 +361,7 @@ export class JunctureBackend {
 
   private async editJiraIssue(request: EditJiraIssueRequest): Promise<EditJiraIssueResponse> {
     try {
-      const response = await this.httpClient.put('/edit-issue', {
+      const response = await this.httpClient.put('/api/backend/jira/edit-issue', {
         issue_key: request.issueKey,
         fields: request.fields
       });
@@ -376,7 +376,7 @@ export class JunctureBackend {
 
   private async deleteJiraIssue(request: DeleteJiraIssueRequest): Promise<DeleteJiraIssueResponse> {
     try {
-      const response = await this.httpClient.delete('/delete-issue', {
+      const response = await this.httpClient.delete('/api/backend/jira/delete-issue', {
         params: {
           issue_key: request.issueKey
         }
@@ -393,7 +393,7 @@ export class JunctureBackend {
   // Sprint Methods
   private async getJiraSprints(request?: GetSprintsRequest): Promise<GetSprintsResponse> {
     try {
-      const response = await this.httpClient.get('/get-all-sprints-for-project', {
+      const response = await this.httpClient.get('/api/backend/jira/get-all-sprints-for-project', {
         params: {
           maxResults: request?.maxResults,
           startAt: request?.startAt
@@ -413,7 +413,7 @@ export class JunctureBackend {
 
   private async getActiveJiraSprints(): Promise<GetActiveSprintsResponse> {
     try {
-      const response = await this.httpClient.get('/get-active-sprints-for-project');
+      const response = await this.httpClient.get('/api/backend/jira/get-active-sprints-for-project');
       return {
         sprints: response.data.sprints || []
       };
@@ -425,7 +425,7 @@ export class JunctureBackend {
   // Board Methods
   private async getJiraBoards(request?: GetJiraBoardRequest): Promise<GetJiraBoardResponse> {
     try {
-      const response = await this.httpClient.get('/get-boards-for-project', {
+      const response = await this.httpClient.get('/api/backend/jira/get-boards-for-project', {
         params: {
           maxResults: request?.maxResults,
           startAt: request?.startAt

@@ -100,7 +100,7 @@ export class JunctureFrontend {
    */
   async getOAuthAuthorizationUrl(request: InitiateOAuthFlowRequest): Promise<InitiateOAuthFlowResponse> {
     try {
-      const response = await this.httpClient.post('/initiate-oauth-flow', {
+      const response = await this.httpClient.post('/api/frontend/oauth/initiate-oauth-flow', {
         provider: request.provider,
         external_id: request.externalId
       });
