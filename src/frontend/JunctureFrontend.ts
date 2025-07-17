@@ -105,7 +105,9 @@ export class JunctureFrontend {
         external_id: request.externalId
       });
       
-      return response.data;
+      return {
+        authorizationUri: response.data.authorization_uri
+      }
     } catch (error) {
       throw this.handleError(error, 'Failed to get OAuth authorization URL');
     }
